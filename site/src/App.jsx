@@ -18,7 +18,7 @@ export default function App() {
           }
         }
       },
-      { rootMargin: "-20% 0px -60% 0px" }
+      { rootMargin: "-20% 0px -60% 0px" },
     );
 
     const sections = document.querySelectorAll("section[id]");
@@ -36,7 +36,7 @@ export default function App() {
       }}
     >
       <Sidebar activeId={activeId} />
-      <main style={{ marginLeft: 220, minHeight: "100vh" }}>
+      <main style={{ minHeight: "100vh" }}>
         <Hero />
         <Introduction />
         <ColorPalette />

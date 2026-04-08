@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SECTIONS = [
   { id: "hero", label: "채 UI" },
@@ -31,11 +31,14 @@ const SECTIONS = [
   { id: "unsupported", label: "미지원 목록" },
 ];
 
-function SidebarLink({ id, label, isActive }) {
+const MOBILE_BREAKPOINT = 768;
+
+function SidebarLink({ id, label, isActive, onClick }) {
   const [hov, setHov] = useState(false);
   return (
     <a
       href={`#${id}`}
+      onClick={onClick}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
@@ -54,73 +57,160 @@ function SidebarLink({ id, label, isActive }) {
   );
 }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < MOBILE_BREAKPOINT : false
+  );
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return isMobile;
+}
+
 export function Sidebar({ activeId }) {
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+
+  // 모바일에서 링크 클릭 시 사이드바 닫기
+  const handleLinkClick = () => {
+    if (isMobile) setOpen(false);
+  };
+
+  // 모바일에서 바깥 클릭 시 닫기
+  useEffect(() => {
+    if (!isMobile || !open) return;
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMobile, open]);
+
   return (
-    <nav
-      aria-label="사이트 내비게이션"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: 220,
-        height: "100vh",
-        overflowY: "auto",
-        background: "var(--card)",
-        borderRight: "1px solid var(--border)",
-        padding: "0 0 40px",
-        fontFamily: "var(--font-sans)",
-        fontSize: 13,
-        zIndex: 100,
-        scrollbarWidth: "thin",
-        scrollbarColor: "var(--border) transparent",
-      }}
-    >
-      {/* Branding */}
-      <a
-        href="#hero"
+    <>
+      {/* 모바일 햄버거 버튼 */}
+      {isMobile && (
+        <button
+          onClick={() => setOpen(!open)}
+          aria-label="메뉴 열기"
+          style={{
+            position: "fixed",
+            top: 12,
+            left: 12,
+            zIndex: 200,
+            width: 40,
+            height: 40,
+            borderRadius: 4,
+            border: "1.5px solid var(--border)",
+            background: "var(--card)",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+          }}
+        >
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+            {open ? (
+              <>
+                <line x1="2" y1="2" x2="16" y2="12" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="2" y1="12" x2="16" y2="2" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+              </>
+            ) : (
+              <>
+                <line x1="1" y1="1" x2="17" y2="1" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="1" y1="7" x2="17" y2="7" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="1" y1="13" x2="17" y2="13" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+              </>
+            )}
+          </svg>
+        </button>
+      )}
+
+      {/* 모바일 오버레이 */}
+      {isMobile && open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.3)",
+            zIndex: 99,
+          }}
+        />
+      )}
+
+      {/* 사이드바 */}
+      <nav
+        aria-label="사이트 내비게이션"
         style={{
-          display: "block",
-          padding: "20px 20px 16px",
-          fontFamily: "var(--font-serif)",
-          fontSize: 18,
-          fontWeight: 800,
-          color: "var(--foreground)",
-          letterSpacing: "-0.02em",
-          borderBottom: "1px solid var(--border)",
-          marginBottom: 12,
-          textDecoration: "none",
+          position: "fixed",
+          top: 0,
+          left: isMobile ? (open ? 0 : -260) : 0,
+          width: isMobile ? 260 : 220,
+          height: "100vh",
+          overflowY: "auto",
+          background: "var(--card)",
+          borderRight: "1px solid var(--border)",
+          padding: "0 0 40px",
+          fontFamily: "var(--font-sans)",
+          fontSize: 13,
+          zIndex: 100,
+          scrollbarWidth: "thin",
+          scrollbarColor: "var(--border) transparent",
+          transition: isMobile ? "left 0.25s ease" : "none",
+          boxShadow: isMobile && open ? "4px 0 16px rgba(0,0,0,0.1)" : "none",
         }}
       >
-        채 UI
-      </a>
+        {/* Branding */}
+        <a
+          href="#hero"
+          onClick={handleLinkClick}
+          style={{
+            display: "block",
+            padding: "20px 20px 16px",
+            fontFamily: "var(--font-serif)",
+            fontSize: 18,
+            fontWeight: 800,
+            color: "var(--foreground)",
+            letterSpacing: "-0.02em",
+            borderBottom: "1px solid var(--border)",
+            marginBottom: 12,
+            textDecoration: "none",
+          }}
+        >
+          채 UI
+        </a>
 
-      {SECTIONS.filter((s) => s.id !== "hero").map((s, i) => {
-        if (s.type === "divider") {
+        {SECTIONS.filter((s) => s.id !== "hero").map((s, i) => {
+          if (s.type === "divider") {
+            return (
+              <div
+                key={i}
+                style={{
+                  padding: "18px 20px 6px",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "var(--muted-foreground)",
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {s.label}
+              </div>
+            );
+          }
           return (
-            <div
-              key={i}
-              style={{
-                padding: "18px 20px 6px",
-                fontSize: 11,
-                fontWeight: 700,
-                color: "var(--muted-foreground)",
-                letterSpacing: "0.05em",
-                textTransform: "uppercase",
-              }}
-            >
-              {s.label}
-            </div>
+            <SidebarLink
+              key={s.id}
+              id={s.id}
+              label={s.label}
+              isActive={activeId === s.id}
+              onClick={handleLinkClick}
+            />
           );
-        }
-        return (
-          <SidebarLink
-            key={s.id}
-            id={s.id}
-            label={s.label}
-            isActive={activeId === s.id}
-          />
-        );
-      })}
-    </nav>
+        })}
+      </nav>
+    </>
   );
 }
