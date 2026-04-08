@@ -1,6 +1,6 @@
 /** 단청 Progress: 3색 구간 (청→황→적), 그라디언트 없음 */
 export function Progress({ value = 0, variant = "default" }) {
-  const h = variant === "seok" ? 8 : 6;
+  const h = 6;
   if (variant === "dancheong") {
     const bands = [{ color: "var(--cheong)", end: 40 }, { color: "var(--hwang)", end: 70 }, { color: "var(--jeok)", end: 100 }];
     return (
@@ -16,8 +16,8 @@ export function Progress({ value = 0, variant = "default" }) {
     );
   }
   return (
-    <div style={{ width: "100%", height: h, background: "var(--muted)", borderRadius: variant === "seok" ? 0 : "3px", overflow: "hidden" }}>
-      <div style={{ width: `${value}%`, height: "100%", background: variant === "seok" ? "var(--seok)" : "var(--primary)", borderRadius: "inherit", transition: "width 0.5s" }} />
+    <div style={{ width: "100%", height: h, background: "var(--muted)", borderRadius: "3px", overflow: "hidden" }}>
+      <div style={{ width: `${value}%`, height: "100%", background: "var(--primary)", borderRadius: "inherit", transition: "width 0.5s" }} />
     </div>
   );
 }

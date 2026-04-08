@@ -12,8 +12,8 @@ const SECTIONS = [
   { id: "comp-textarea", label: "Textarea" },
   { id: "comp-select", label: "Select" },
   { id: "comp-checkbox", label: "Checkbox" },
-  { id: "comp-radiogroup", label: "RadioGroup" },
-  { id: "comp-toggle", label: "Toggle" },
+  { id: "comp-radiogroup", label: "Radio Group" },
+  { id: "comp-switch", label: "Switch" },
   { id: "comp-alert", label: "Alert" },
   { id: "comp-toast", label: "Toast" },
   { id: "comp-progress", label: "Progress" },
@@ -26,7 +26,9 @@ const SECTIONS = [
   { id: "comp-accordion", label: "Accordion" },
   { id: "comp-table", label: "Table" },
   { id: "comp-avatar", label: "Avatar" },
-  { id: "comp-changhodialog", label: "ChanghoDialog" },
+  { id: "comp-dialog", label: "Dialog" },
+  { type: "divider", label: "기타" },
+  { id: "unsupported", label: "미지원 목록" },
 ];
 
 function SidebarLink({ id, label, isActive }) {

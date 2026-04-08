@@ -1,6 +1,13 @@
 import { useState } from "react";
+
+function normalize(o) {
+  if (typeof o === "string") return { value: o, label: o };
+  return o;
+}
+
 export function Select({ label, options = [], value, onChange, placeholder = "선택..." }) {
   const [f, setF] = useState(false);
+  const items = options.map(normalize);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
       {label && <label style={{ fontSize: "13px", fontWeight: 500, color: "var(--muted-foreground)" }}>{label}</label>}
@@ -11,7 +18,7 @@ export function Select({ label, options = [], value, onChange, placeholder = "�
         border: f ? "1.5px solid var(--primary)" : "1.5px solid var(--border)", borderRadius: "4px", outline: "none", cursor: "pointer", color: "var(--foreground)", paddingRight: "36px",
       }}>
         <option value="" disabled>{placeholder}</option>
-        {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+        {items.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
     </div>
   );

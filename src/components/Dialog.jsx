@@ -1,5 +1,5 @@
 import { DancheongStripe } from "./DancheongStripe";
-export function ChanghoDialog({ open, onClose, title, children }) {
+export function Dialog({ open, onClose, title, children }) {
   if (!open) return null;
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center" }}>

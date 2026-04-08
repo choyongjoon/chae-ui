@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {
-  Button, Card, Badge, Input, Textarea, Select, Checkbox, RadioGroup, Toggle,
+  Button, Card, Badge, Input, Textarea, Select, Checkbox, RadioGroup, Switch,
   Alert, Toast, Progress, Skeleton, Separator, DancheongStripe, Tabs,
-  Breadcrumb, Stepper, Accordion, Table, Avatar, ChanghoDialog,
+  Breadcrumb, Stepper, Accordion, Table, Avatar, Dialog,
 } from "chae-ui";
 import { PropsTable } from "../components/PropsTable";
 import { CodeBlock } from "../components/CodeBlock";
@@ -48,24 +48,29 @@ function ButtonDemo() {
     <Section
       id="comp-button"
       title="Button"
-      desc="7가지 variant와 3가지 size를 지원하는 버튼"
+      desc="6가지 variant와 3가지 size, disabled 상태를 지원하는 버튼"
       importCode={`import { Button } from "chae-ui";`}
       propsData={[
-        { name: "variant", type: "string", default: '"default"', desc: "default | secondary | accent | destructive | outline | ghost | dancheong" },
+        { name: "variant", type: "string", default: '"default"', desc: "default | secondary | accent | destructive | outline | ghost" },
         { name: "size", type: "string", default: '"default"', desc: "sm | default | lg" },
+        { name: "disabled", type: "boolean", default: "false", desc: "비활성화 (석 스타일)" },
         { name: "children", type: "ReactNode", desc: "버튼 내용" },
         { name: "style", type: "CSSProperties", default: "{}", desc: "추가 스타일" },
       ]}
     >
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
-        {["default", "secondary", "accent", "destructive", "outline", "ghost", "dancheong"].map((v) => (
+        {["default", "secondary", "accent", "destructive", "outline", "ghost"].map((v) => (
           <Button key={v} variant={v}>{v}</Button>
         ))}
       </div>
-      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 16 }}>
         <Button size="sm">Small</Button>
         <Button size="default">Default</Button>
         <Button size="lg">Large</Button>
+      </div>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <Button disabled>Disabled</Button>
+        <Button variant="outline" disabled>Disabled Outline</Button>
       </div>
     </Section>
   );
@@ -121,18 +126,17 @@ function InputDemo() {
     <Section
       id="comp-input"
       title="Input"
-      desc="라벨과 variant를 지원하는 텍스트 입력"
+      desc="기본 텍스트 입력 + disabled 석 스타일"
       importCode={`import { Input } from "chae-ui";`}
       propsData={[
         { name: "label", type: "string", desc: "입력 라벨" },
-        { name: "variant", type: "string", default: '"default"', desc: "default | hanzi | changho" },
         { name: "placeholder", type: "string", desc: "플레이스홀더" },
+        { name: "disabled", type: "boolean", default: "false", desc: "비활성화 (석 스타일)" },
       ]}
     >
       <div style={{ display: "grid", gap: 16, maxWidth: 320 }}>
-        <Input label="Default" placeholder="입력하세요..." />
-        <Input label="Hanzi" variant="hanzi" placeholder="한지 스타일" />
-        <Input label="Changho" variant="changho" placeholder="창호 스타일" />
+        <Input label="이름" placeholder="입력하세요..." />
+        <Input label="비활성화" placeholder="편집 불가" disabled />
       </div>
     </Section>
   );
@@ -162,11 +166,11 @@ function SelectDemo() {
     <Section
       id="comp-select"
       title="Select"
-      desc="드롭다운 선택 입력"
+      desc="드롭다운 선택 입력. 문자열 배열 또는 {value, label} 객체 배열 지원"
       importCode={`import { Select } from "chae-ui";`}
       propsData={[
         { name: "label", type: "string", desc: "라벨" },
-        { name: "options", type: "string[]", default: "[]", desc: "선택 옵션 배열" },
+        { name: "options", type: "string[] | {value, label}[]", default: "[]", desc: "선택 옵션 배열" },
         { name: "value", type: "string", desc: "현재 값" },
         { name: "onChange", type: "function", desc: "변경 콜백" },
         { name: "placeholder", type: "string", default: '"선택..."', desc: "플레이스홀더" },
@@ -179,6 +183,7 @@ function SelectDemo() {
           value={val}
           onChange={setVal}
         />
+        {val && <p style={{ marginTop: 12, fontSize: 13, color: "var(--muted-foreground)" }}>선택됨: {val}</p>}
       </div>
     </Section>
   );
@@ -208,19 +213,23 @@ function RadioGroupDemo() {
   return (
     <Section
       id="comp-radiogroup"
-      title="RadioGroup"
-      desc="라디오 버튼 그룹"
+      title="Radio Group"
+      desc="라디오 버튼 그룹. 문자열 배열 또는 {value, label} 객체 배열 지원"
       importCode={`import { RadioGroup } from "chae-ui";`}
       propsData={[
-        { name: "options", type: "string[]", default: "[]", desc: "선택 옵션 배열" },
+        { name: "options", type: "string[] | {value, label}[]", default: "[]", desc: "선택 옵션 배열" },
         { name: "value", type: "string", desc: "현재 값" },
         { name: "onChange", type: "function", desc: "변경 콜백" },
         { name: "label", type: "string", desc: "그룹 라벨" },
       ]}
     >
       <RadioGroup
-        label="색상 선택"
-        options={["cheong", "jeok", "hwang"]}
+        label="오방색 선택"
+        options={[
+          { value: "cheong", label: "청 (靑)" },
+          { value: "jeok", label: "적 (赤)" },
+          { value: "hwang", label: "황 (黃)" },
+        ]}
         value={val}
         onChange={setVal}
       />
@@ -228,21 +237,21 @@ function RadioGroupDemo() {
   );
 }
 
-function ToggleDemo() {
+function SwitchDemo() {
   const [on, setOn] = useState(false);
   return (
     <Section
-      id="comp-toggle"
-      title="Toggle"
+      id="comp-switch"
+      title="Switch"
       desc="온/오프 토글 스위치"
-      importCode={`import { Toggle } from "chae-ui";`}
+      importCode={`import { Switch } from "chae-ui";`}
       propsData={[
-        { name: "checked", type: "boolean", default: "false", desc: "토글 상태" },
+        { name: "checked", type: "boolean", default: "false", desc: "스위치 상태" },
         { name: "onChange", type: "function", desc: "변경 콜백" },
       ]}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <Toggle checked={on} onChange={() => setOn(!on)} />
+        <Switch checked={on} onChange={() => setOn(!on)} />
         <span style={{ fontSize: 14 }}>{on ? "켜짐" : "꺼짐"}</span>
       </div>
     </Section>
@@ -309,11 +318,11 @@ function ProgressDemo() {
     <Section
       id="comp-progress"
       title="Progress"
-      desc="3가지 variant를 지원하는 진행 표시줄"
+      desc="2가지 variant를 지원하는 진행 표시줄"
       importCode={`import { Progress } from "chae-ui";`}
       propsData={[
         { name: "value", type: "number", default: "0", desc: "진행 값 (0-100)" },
-        { name: "variant", type: "string", default: '"default"', desc: "default | dancheong | seok" },
+        { name: "variant", type: "string", default: '"default"', desc: "default | dancheong" },
       ]}
     >
       <div style={{ display: "grid", gap: 16 }}>
@@ -324,10 +333,6 @@ function ProgressDemo() {
         <div>
           <span style={{ fontSize: 13, marginBottom: 4, display: "block" }}>dancheong</span>
           <Progress value={75} variant="dancheong" />
-        </div>
-        <div>
-          <span style={{ fontSize: 13, marginBottom: 4, display: "block" }}>seok</span>
-          <Progress value={45} variant="seok" />
         </div>
       </div>
     </Section>
@@ -536,14 +541,14 @@ function AvatarDemo() {
   );
 }
 
-function ChanghoDialogDemo() {
+function DialogDemo() {
   const [open, setOpen] = useState(false);
   return (
     <Section
-      id="comp-changhodialog"
-      title="ChanghoDialog"
+      id="comp-dialog"
+      title="Dialog"
       desc="창호 디자인 다이얼로그 (DancheongStripe 헤더)"
-      importCode={`import { ChanghoDialog } from "chae-ui";`}
+      importCode={`import { Dialog } from "chae-ui";`}
       propsData={[
         { name: "open", type: "boolean", desc: "열림 상태" },
         { name: "onClose", type: "function", desc: "닫기 콜백" },
@@ -554,13 +559,61 @@ function ChanghoDialogDemo() {
       <Button variant="outline" onClick={() => setOpen(true)}>
         Dialog 열기
       </Button>
-      <ChanghoDialog open={open} onClose={() => setOpen(false)} title="창호 다이얼로그">
+      <Dialog open={open} onClose={() => setOpen(false)} title="창호 다이얼로그">
         <p style={{ fontFamily: "var(--font-sans)", fontSize: 14, lineHeight: 1.6 }}>
           창호(窓戶)는 한옥의 문과 창을 통칭하는 말입니다.
           나무 격자 위에 한지를 바르는 전통 방식을 모던 UI에 반영했습니다.
         </p>
-      </ChanghoDialog>
+      </Dialog>
     </Section>
+  );
+}
+
+const UNSUPPORTED = [
+  "Alert Dialog", "Aspect Ratio", "Calendar", "Carousel", "Chart",
+  "Collapsible", "Combobox", "Command", "Context Menu", "Data Table",
+  "Date Picker", "Drawer", "Dropdown Menu", "Hover Card", "Input OTP",
+  "Label", "Menubar", "Navigation Menu", "Pagination", "Popover",
+  "Resizable", "Scroll Area", "Sheet", "Sidebar", "Slider",
+  "Sonner", "Toggle", "Toggle Group", "Tooltip",
+];
+
+function UnsupportedList() {
+  return (
+    <section id="unsupported" style={{ padding: "56px 40px 0", maxWidth: 820, margin: "0 auto" }}>
+      <h3
+        style={{
+          fontFamily: "var(--font-serif)",
+          fontSize: 20,
+          fontWeight: 700,
+          marginBottom: 6,
+        }}
+      >
+        미지원 컴포넌트
+      </h3>
+      <p style={{ fontSize: 14, color: "var(--muted-foreground)", marginBottom: 16, lineHeight: 1.6 }}>
+        아래는 <a href="https://ui.shadcn.com/docs/components" target="_blank" rel="noopener noreferrer" style={{ color: "var(--primary)" }}>shadcn/ui</a>에서
+        제공하지만 채 UI에서 아직 지원하지 않는 컴포넌트입니다.
+      </p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+        {UNSUPPORTED.map((name) => (
+          <span
+            key={name}
+            style={{
+              padding: "4px 10px",
+              fontSize: 12,
+              fontFamily: "var(--font-sans)",
+              background: "var(--muted)",
+              color: "var(--muted-foreground)",
+              borderRadius: 3,
+            }}
+          >
+            {name}
+          </span>
+        ))}
+      </div>
+      <div style={{ height: 48 }} />
+    </section>
   );
 }
 
@@ -579,7 +632,7 @@ export function ComponentDocs() {
           컴포넌트
         </h2>
         <p style={{ fontSize: 14, color: "var(--muted-foreground)", lineHeight: 1.6 }}>
-          22개의 React 컴포넌트. 각 컴포넌트는 한국 전통 건축의 요소를 반영합니다.
+          22개의 React 컴포넌트. shadcn/ui 이름 규칙을 따르며, 한국 전통 건축의 요소를 반영합니다.
         </p>
       </div>
       <ButtonDemo />
@@ -590,7 +643,7 @@ export function ComponentDocs() {
       <SelectDemo />
       <CheckboxDemo />
       <RadioGroupDemo />
-      <ToggleDemo />
+      <SwitchDemo />
       <AlertDemo />
       <ToastDemo />
       <ProgressDemo />
@@ -603,7 +656,8 @@ export function ComponentDocs() {
       <AccordionDemo />
       <TableDemo />
       <AvatarDemo />
-      <ChanghoDialogDemo />
+      <DialogDemo />
+      <UnsupportedList />
     </div>
   );
 }
