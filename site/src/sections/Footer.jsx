@@ -39,7 +39,7 @@ export function Footer() {
           채 UI — shadcn/ui 기반 한국 전통 건축 디자인 시스템
         </p>
         <p style={{ marginTop: 8 }}>
-          <FooterLink href="https://github.com/choyongjoon/chae">GitHub</FooterLink>
+          <FooterLink href="https://github.com/choyongjoon/chae-ui">GitHub</FooterLink>
           {" · "}
           <FooterLink href="https://www.npmjs.com/package/chae-ui">npm</FooterLink>
         </p>

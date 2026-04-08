@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/chae-ui)](https://www.npmjs.com/package/chae-ui)
 
-> **[소개 사이트 보기](https://choyongjoon.github.io/chae/)**
+> **[소개 사이트 보기](https://choyongjoon.github.io/chae-ui/)**
 
 ## 설치
 

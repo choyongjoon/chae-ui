@@ -136,7 +136,7 @@ export function Hero() {
             <Button variant="default" size="lg">둘러보기</Button>
           </a>
           <a
-            href="https://github.com/choyongjoon/chae"
+            href="https://github.com/choyongjoon/chae-ui"
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none" }}

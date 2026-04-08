@@ -60,7 +60,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/choyongjoon/chae.git"
+    "url": "https://github.com/choyongjoon/chae-ui.git"
   },
-  "homepage": "https://choyongjoon.github.io/chae/"
+  "homepage": "https://choyongjoon.github.io/chae-ui/"
 }
