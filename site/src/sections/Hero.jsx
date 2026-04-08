@@ -17,7 +17,7 @@ export function Hero() {
         style={{
           padding: "80px 40px 60px",
           textAlign: "center",
-          maxWidth: 720,
+          maxWidth: 820,
           margin: "0 auto",
         }}
       >
@@ -58,7 +58,11 @@ export function Hero() {
         </p>
 
         <div
+          role="button"
+          tabIndex={0}
+          aria-label="npm install chae-ui 복사"
           onClick={handleCopy}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleCopy(); } }}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -77,27 +81,31 @@ export function Hero() {
           <span style={{ opacity: 0.5 }}>$</span>
           <span>npm install chae-ui</span>
           <span style={{ opacity: 0.5, fontSize: 12 }}>
-            {copied ? "Copied!" : "Click to copy"}
+            {copied ? "복사됨!" : "클릭하여 복사"}
           </span>
         </div>
 
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
-          <Button variant="default" size="lg">
-            <a href="#introduction" style={{ color: "inherit", textDecoration: "none" }}>
-              둘러보기
-            </a>
-          </Button>
-          <Button variant="outline" size="lg">
-            <a
-              href="https://github.com/choyongjoon/chae"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              GitHub
-            </a>
-          </Button>
+          <a href="#introduction" style={{ textDecoration: "none" }}>
+            <Button variant="default" size="lg">둘러보기</Button>
+          </a>
+          <a
+            href="https://github.com/choyongjoon/chae"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            <Button variant="outline" size="lg">GitHub</Button>
+          </a>
         </div>
+      </div>
+
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: "0 40px" }}>
+        <div style={{
+          height: 1,
+          background: "linear-gradient(to right, transparent, var(--border), transparent)",
+          marginTop: 0,
+        }} />
       </div>
     </section>
   );

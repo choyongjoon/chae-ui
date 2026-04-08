@@ -16,10 +16,10 @@ export function PropsTable({ props }) {
               textAlign: "left",
             }}
           >
-            <th style={{ padding: "8px 12px", fontWeight: 600 }}>Prop</th>
-            <th style={{ padding: "8px 12px", fontWeight: 600 }}>Type</th>
-            <th style={{ padding: "8px 12px", fontWeight: 600 }}>Default</th>
-            <th style={{ padding: "8px 12px", fontWeight: 600 }}>Description</th>
+            <th style={{ padding: "8px 12px", fontWeight: 600 }}>속성</th>
+            <th style={{ padding: "8px 12px", fontWeight: 600 }}>타입</th>
+            <th style={{ padding: "8px 12px", fontWeight: 600 }}>기본값</th>
+            <th style={{ padding: "8px 12px", fontWeight: 600 }}>설명</th>
           </tr>
         </thead>
         <tbody>

@@ -9,13 +9,13 @@ import { CodeBlock } from "../components/CodeBlock";
 
 function Section({ id, title, desc, importCode, propsData, children }) {
   return (
-    <section id={id} style={{ padding: "48px 40px 0", maxWidth: 720, margin: "0 auto" }}>
+    <section id={id} style={{ padding: "56px 40px 0", maxWidth: 820, margin: "0 auto" }}>
       <h3
         style={{
           fontFamily: "var(--font-serif)",
-          fontSize: 22,
+          fontSize: 20,
           fontWeight: 700,
-          marginBottom: 4,
+          marginBottom: 6,
         }}
       >
         {title}
@@ -38,6 +38,7 @@ function Section({ id, title, desc, importCode, propsData, children }) {
         {children}
       </div>
       {propsData && <PropsTable props={propsData} />}
+      <div style={{ height: 24 }} />
     </section>
   );
 }
@@ -566,7 +567,7 @@ function ChanghoDialogDemo() {
 export function ComponentDocs() {
   return (
     <div>
-      <div style={{ padding: "48px 40px 0", maxWidth: 720, margin: "0 auto" }}>
+      <div style={{ padding: "64px 40px 0", maxWidth: 820, margin: "0 auto" }}>
         <h2
           style={{
             fontFamily: "var(--font-serif)",

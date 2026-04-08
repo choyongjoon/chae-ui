@@ -68,7 +68,7 @@ export function ColorPalette() {
   return (
     <section
       id="colors"
-      style={{ padding: "60px 40px", maxWidth: 720, margin: "0 auto" }}
+      style={{ padding: "64px 40px", maxWidth: 820, margin: "0 auto" }}
     >
       <h2
         style={{
@@ -84,7 +84,7 @@ export function ColorPalette() {
       <h3
         style={{
           fontFamily: "var(--font-serif)",
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: 700,
           marginBottom: 16,
         }}
@@ -110,7 +110,7 @@ export function ColorPalette() {
       <h3
         style={{
           fontFamily: "var(--font-serif)",
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: 700,
           marginBottom: 16,
         }}

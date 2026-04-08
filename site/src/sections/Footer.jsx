@@ -1,4 +1,25 @@
+import { useState } from "react";
 import { DancheongStripe } from "chae-ui";
+
+function FooterLink({ href, children }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        color: "var(--primary)",
+        textDecoration: hov ? "underline" : "none",
+        transition: "all 0.15s",
+      }}
+    >
+      {children}
+    </a>
+  );
+}
 
 export function Footer() {
   return (
@@ -18,23 +39,9 @@ export function Footer() {
           채 UI — shadcn/ui 기반 한국 전통 건축 디자인 시스템
         </p>
         <p style={{ marginTop: 8 }}>
-          <a
-            href="https://github.com/choyongjoon/chae"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--primary)", textDecoration: "none" }}
-          >
-            GitHub
-          </a>
+          <FooterLink href="https://github.com/choyongjoon/chae">GitHub</FooterLink>
           {" · "}
-          <a
-            href="https://www.npmjs.com/package/chae-ui"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--primary)", textDecoration: "none" }}
-          >
-            npm
-          </a>
+          <FooterLink href="https://www.npmjs.com/package/chae-ui">npm</FooterLink>
         </p>
       </div>
     </footer>

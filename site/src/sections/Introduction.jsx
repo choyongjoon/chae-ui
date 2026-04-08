@@ -37,7 +37,7 @@ export function Introduction() {
   return (
     <section
       id="introduction"
-      style={{ padding: "60px 40px", maxWidth: 720, margin: "0 auto" }}
+      style={{ padding: "64px 40px", maxWidth: 820, margin: "0 auto" }}
     >
       <h2
         style={{
@@ -81,6 +81,7 @@ export function Introduction() {
         style={{
           fontFamily: "var(--font-serif)",
           fontSize: 20,
+          letterSpacing: "-0.01em",
           fontWeight: 700,
           marginBottom: 16,
         }}

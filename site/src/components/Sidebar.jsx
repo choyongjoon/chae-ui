@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const SECTIONS = [
   { id: "hero", label: "채 UI" },
   { id: "introduction", label: "소개" },
@@ -27,9 +29,33 @@ const SECTIONS = [
   { id: "comp-changhodialog", label: "ChanghoDialog" },
 ];
 
+function SidebarLink({ id, label, isActive }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <a
+      href={`#${id}`}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        display: "block",
+        padding: "7px 20px",
+        color: isActive ? "var(--primary)" : hov ? "var(--primary)" : "var(--foreground)",
+        textDecoration: "none",
+        fontWeight: isActive ? 600 : 400,
+        background: isActive ? "var(--muted)" : hov ? "rgba(0,0,0,0.03)" : "transparent",
+        borderRight: isActive ? "2px solid var(--primary)" : "2px solid transparent",
+        transition: "all 0.15s",
+      }}
+    >
+      {label}
+    </a>
+  );
+}
+
 export function Sidebar({ activeId }) {
   return (
     <nav
+      aria-label="사이트 내비게이션"
       style={{
         position: "fixed",
         top: 0,
@@ -39,19 +65,40 @@ export function Sidebar({ activeId }) {
         overflowY: "auto",
         background: "var(--card)",
         borderRight: "1px solid var(--border)",
-        padding: "20px 0",
+        padding: "0 0 40px",
         fontFamily: "var(--font-sans)",
         fontSize: 13,
         zIndex: 100,
+        scrollbarWidth: "thin",
+        scrollbarColor: "var(--border) transparent",
       }}
     >
-      {SECTIONS.map((s, i) => {
+      {/* Branding */}
+      <a
+        href="#hero"
+        style={{
+          display: "block",
+          padding: "20px 20px 16px",
+          fontFamily: "var(--font-serif)",
+          fontSize: 18,
+          fontWeight: 800,
+          color: "var(--foreground)",
+          letterSpacing: "-0.02em",
+          borderBottom: "1px solid var(--border)",
+          marginBottom: 12,
+          textDecoration: "none",
+        }}
+      >
+        채 UI
+      </a>
+
+      {SECTIONS.filter((s) => s.id !== "hero").map((s, i) => {
         if (s.type === "divider") {
           return (
             <div
               key={i}
               style={{
-                padding: "16px 20px 6px",
+                padding: "18px 20px 6px",
                 fontSize: 11,
                 fontWeight: 700,
                 color: "var(--muted-foreground)",
@@ -63,24 +110,13 @@ export function Sidebar({ activeId }) {
             </div>
           );
         }
-        const isActive = activeId === s.id;
         return (
-          <a
+          <SidebarLink
             key={s.id}
-            href={`#${s.id}`}
-            style={{
-              display: "block",
-              padding: "6px 20px",
-              color: isActive ? "var(--primary)" : "var(--foreground)",
-              textDecoration: "none",
-              fontWeight: isActive ? 600 : 400,
-              background: isActive ? "var(--muted)" : "transparent",
-              borderRight: isActive ? "2px solid var(--primary)" : "2px solid transparent",
-              transition: "all 0.15s",
-            }}
-          >
-            {s.label}
-          </a>
+            id={s.id}
+            label={s.label}
+            isActive={activeId === s.id}
+          />
         );
       })}
     </nav>
