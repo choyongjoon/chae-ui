@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 import {
   Button, Card, Badge, Input, Textarea, Select, Checkbox, RadioGroup, Switch,
   Alert, Toast, Progress, Skeleton, Separator, DancheongStripe, Tabs,
@@ -7,7 +8,23 @@ import {
 import { PropsTable } from "../components/PropsTable";
 import { CodeBlock } from "../components/CodeBlock";
 
-function Section({ id, title, desc, importCode, propsData, children }) {
+interface PropData {
+  name: string;
+  type: string;
+  default?: string;
+  desc: string;
+}
+
+interface SectionProps {
+  id: string;
+  title: string;
+  desc: string;
+  importCode: string;
+  propsData: PropData[];
+  children: ReactNode;
+}
+
+function Section({ id, title, desc, importCode, propsData, children }: SectionProps) {
   return (
     <section id={id} style={{ padding: "56px 40px 0", maxWidth: 820, margin: "0 auto" }}>
       <h3
@@ -161,7 +178,7 @@ function TextareaDemo() {
 }
 
 function SelectDemo() {
-  const [val, setVal] = useState("");
+  const [val, setVal] = useState<string>("");
   return (
     <Section
       id="comp-select"
@@ -190,7 +207,7 @@ function SelectDemo() {
 }
 
 function CheckboxDemo() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
   return (
     <Section
       id="comp-checkbox"
@@ -209,7 +226,7 @@ function CheckboxDemo() {
 }
 
 function RadioGroupDemo() {
-  const [val, setVal] = useState("cheong");
+  const [val, setVal] = useState<string>("cheong");
   return (
     <Section
       id="comp-radiogroup"
@@ -238,7 +255,7 @@ function RadioGroupDemo() {
 }
 
 function SwitchDemo() {
-  const [on, setOn] = useState(false);
+  const [on, setOn] = useState<boolean>(false);
   return (
     <Section
       id="comp-switch"
@@ -281,9 +298,9 @@ function AlertDemo() {
 }
 
 function ToastDemo() {
-  const [toastVar, setToastVar] = useState(null);
+  const [toastVar, setToastVar] = useState<string | null>(null);
 
-  const showToast = (variant) => {
+  const showToast = (variant: string) => {
     setToastVar(variant);
     setTimeout(() => setToastVar(null), 2000);
   };
@@ -415,7 +432,7 @@ function DancheongStripeDemo() {
 }
 
 function TabsDemo() {
-  const [active, setActive] = useState("tab1");
+  const [active, setActive] = useState<string>("tab1");
   return (
     <Section
       id="comp-tabs"
@@ -542,7 +559,7 @@ function AvatarDemo() {
 }
 
 function DialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <Section
       id="comp-dialog"
@@ -569,7 +586,7 @@ function DialogDemo() {
   );
 }
 
-const UNSUPPORTED = [
+const UNSUPPORTED: string[] = [
   "Alert Dialog", "Aspect Ratio", "Calendar", "Carousel", "Chart",
   "Collapsible", "Combobox", "Command", "Context Menu", "Data Table",
   "Date Picker", "Drawer", "Dropdown Menu", "Hover Card", "Input OTP",

@@ -8,7 +8,7 @@ import { Footer } from "./sections/Footer";
 
 const MOBILE_BREAKPOINT = 768;
 
-function useIsMobile() {
+function useIsMobile(): boolean {
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < MOBILE_BREAKPOINT : false
   );

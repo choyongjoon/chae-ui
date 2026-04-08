@@ -1,6 +1,14 @@
 import { Badge } from "chae-ui";
 
-const OBANGSAEK = [
+interface ColorItem {
+  name: string;
+  var: string;
+  hex: string;
+  meaning?: string;
+  dark?: boolean;
+}
+
+const OBANGSAEK: ColorItem[] = [
   { name: "청 cheong", var: "--cheong", hex: "#2B6B5E", meaning: "木 / 동 / Blue-green" },
   { name: "백 baek", var: "--baek", hex: "#F5F0E8", meaning: "金 / 서 / Warm white", dark: true },
   { name: "적 jeok", var: "--jeok", hex: "#C23B3B", meaning: "火 / 남 / Red" },
@@ -8,7 +16,7 @@ const OBANGSAEK = [
   { name: "황 hwang", var: "--hwang", hex: "#D4A843", meaning: "土 / 중앙 / Gold yellow" },
 ];
 
-const MATERIALS = [
+const MATERIALS: ColorItem[] = [
   { name: "한지 hanzi", var: "--hanzi", hex: "#FAF6EF", dark: true },
   { name: "황토 hwangto", var: "--hwangto", hex: "#C8A97E" },
   { name: "목재 mokjae", var: "--mokjae", hex: "#8B6F4E" },
@@ -19,7 +27,15 @@ const MATERIALS = [
   { name: "먹 meok", var: "--meok", hex: "#3D3835" },
 ];
 
-function Swatch({ name, hex, cssVar, meaning, dark }) {
+interface SwatchProps {
+  name: string;
+  hex: string;
+  cssVar: string;
+  meaning?: string;
+  dark?: boolean;
+}
+
+function Swatch({ name, hex, cssVar, meaning, dark }: SwatchProps) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
       <div

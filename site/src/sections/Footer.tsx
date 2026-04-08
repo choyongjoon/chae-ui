@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { DancheongStripe } from "chae-ui";
 
-function FooterLink({ href, children }) {
+interface FooterLinkProps {
+  href: string;
+  children: ReactNode;
+}
+
+function FooterLink({ href, children }: FooterLinkProps) {
   const [hov, setHov] = useState(false);
   return (
     <a

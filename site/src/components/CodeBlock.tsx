@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export function CodeBlock({ children }) {
+interface CodeBlockProps {
+  children: string;
+}
+
+export function CodeBlock({ children }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [hov, setHov] = useState(false);
 

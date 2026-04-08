@@ -1,4 +1,15 @@
-export function PropsTable({ props }) {
+interface PropItem {
+  name: string;
+  type: string;
+  default?: string;
+  desc: string;
+}
+
+interface PropsTableProps {
+  props: PropItem[];
+}
+
+export function PropsTable({ props }: PropsTableProps) {
   return (
     <div style={{ overflowX: "auto", marginTop: 16 }}>
       <table

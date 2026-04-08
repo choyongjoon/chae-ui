@@ -1,6 +1,12 @@
 import { Card } from "chae-ui";
 
-const MAPPINGS = [
+interface Mapping {
+  source: string;
+  desc: string;
+  impl: string;
+}
+
+const MAPPINGS: Mapping[] = [
   {
     source: "단청",
     desc: "컬러 시스템, 색띠, Alert 위계",

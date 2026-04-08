@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 
-const SECTIONS = [
+interface SectionItem {
+  id?: string;
+  label: string;
+  type?: "divider";
+}
+
+const SECTIONS: SectionItem[] = [
   { id: "hero", label: "채 UI" },
   { id: "introduction", label: "소개" },
   { id: "colors", label: "색상 팔레트" },
@@ -33,7 +39,14 @@ const SECTIONS = [
 
 const MOBILE_BREAKPOINT = 768;
 
-function SidebarLink({ id, label, isActive, onClick }) {
+interface SidebarLinkProps {
+  id: string;
+  label: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+function SidebarLink({ id, label, isActive, onClick }: SidebarLinkProps) {
   const [hov, setHov] = useState(false);
   return (
     <a
@@ -57,7 +70,7 @@ function SidebarLink({ id, label, isActive, onClick }) {
   );
 }
 
-function useIsMobile() {
+function useIsMobile(): boolean {
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < MOBILE_BREAKPOINT : false
   );
@@ -69,7 +82,11 @@ function useIsMobile() {
   return isMobile;
 }
 
-export function Sidebar({ activeId }) {
+interface SidebarProps {
+  activeId: string;
+}
+
+export function Sidebar({ activeId }: SidebarProps) {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
 
@@ -81,7 +98,7 @@ export function Sidebar({ activeId }) {
   // 모바일에서 바깥 클릭 시 닫기
   useEffect(() => {
     if (!isMobile || !open) return;
-    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isMobile, open]);
@@ -222,7 +239,7 @@ export function Sidebar({ activeId }) {
           return (
             <SidebarLink
               key={s.id}
-              id={s.id}
+              id={s.id!}
               label={s.label}
               isActive={activeId === s.id}
               onClick={handleLinkClick}

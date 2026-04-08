@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { DancheongStripe, Button } from "chae-ui";
 
-const COMMANDS = {
+const COMMANDS: Record<string, string> = {
   pnpm: "pnpm add chae-ui",
   yarn: "yarn add chae-ui",
   npm: "npm install chae-ui",
 };
 
-const PKG_MANAGERS = ["pnpm", "yarn", "npm"];
+const PKG_MANAGERS = ["pnpm", "yarn", "npm"] as const;
 
 export function Hero() {
   const [copied, setCopied] = useState(false);
-  const [pm, setPm] = useState("pnpm");
+  const [pm, setPm] = useState<string>("pnpm");
 
   const handleCopy = () => {
     navigator.clipboard.writeText(COMMANDS[pm]);
