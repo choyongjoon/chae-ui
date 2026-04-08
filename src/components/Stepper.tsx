@@ -1,5 +1,10 @@
+export interface StepperProps {
+  steps: string[];
+  current?: number;
+}
+
 /** 석탑 스테퍼 — 직각, 쌓아올리는 형태 */
-export function Stepper({ steps, current = 0 }) {
+export function Stepper({ steps, current = 0 }: StepperProps) {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       {steps.map((_, i) => (

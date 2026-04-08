@@ -1,5 +1,13 @@
 import { useState } from "react";
-export function Input({ label, placeholder, disabled = false, ...props }) {
+import type { InputHTMLAttributes } from "react";
+
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'placeholder'> {
+  label?: string;
+  placeholder?: string;
+  disabled?: boolean;
+}
+
+export function Input({ label, placeholder, disabled = false, ...props }: InputProps) {
   const [f, setF] = useState(false);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>

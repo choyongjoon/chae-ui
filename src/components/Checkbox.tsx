@@ -1,8 +1,15 @@
+export interface CheckboxProps {
+  checked: boolean;
+  onChange?: (checked: boolean) => void;
+  label?: string;
+  disabled?: boolean;
+}
+
 /**
  * 채 UI — Checkbox
  * shadcn/ui 구조 기반, Radix UI 없이 네이티브 input으로 구현
  */
-export function Checkbox({ checked, onChange, label, disabled = false }) {
+export function Checkbox({ checked, onChange, label, disabled = false }: CheckboxProps) {
   return (
     <label
       style={{

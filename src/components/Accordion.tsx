@@ -1,7 +1,13 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
+
+export interface AccordionProps {
+  items: { title: string; content: ReactNode }[];
+}
+
 /** 아코디언 — 창호 접이식, 목재 테두리 */
-export function Accordion({ items }) {
-  const [open, setOpen] = useState(null);
+export function Accordion({ items }: AccordionProps) {
+  const [open, setOpen] = useState<number | null>(null);
   return (
     <div style={{ border: "var(--changho-border, 3px) solid var(--changho-color, var(--mokjae))", borderRadius: "2px", overflow: "hidden" }}>
       {items.map((item, i) => (

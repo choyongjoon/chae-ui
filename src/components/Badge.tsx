@@ -1,4 +1,11 @@
-export function Badge({ variant = "default", children }) {
+import type { ReactNode } from "react";
+
+export interface BadgeProps {
+  variant?: "default" | "secondary" | "destructive" | "accent" | "outline";
+  children: ReactNode;
+}
+
+export function Badge({ variant = "default", children }: BadgeProps) {
   const v = {
     default: { bg: "var(--primary)", color: "var(--primary-foreground)" },
     secondary: { bg: "var(--muted)", color: "var(--muted-foreground)" },

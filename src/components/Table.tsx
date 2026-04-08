@@ -1,4 +1,11 @@
-export function Table({ columns, rows }) {
+import type { ReactNode } from "react";
+
+export interface TableProps {
+  columns: string[];
+  rows: ReactNode[][];
+}
+
+export function Table({ columns, rows }: TableProps) {
   return (
     <div style={{ overflowX: "auto", border: "var(--changho-border, 3px) solid var(--changho-color, var(--mokjae))", borderRadius: "2px" }}>
       <table style={{ width: "100%", fontSize: "13px", borderCollapse: "collapse" }}>

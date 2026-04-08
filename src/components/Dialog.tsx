@@ -1,5 +1,14 @@
+import type { ReactNode } from "react";
 import { DancheongStripe } from "./DancheongStripe";
-export function Dialog({ open, onClose, title, children }) {
+
+export interface DialogProps {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+}
+
+export function Dialog({ open, onClose, title, children }: DialogProps) {
   if (!open) return null;
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center" }}>

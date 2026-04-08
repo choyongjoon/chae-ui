@@ -1,11 +1,19 @@
 import { useState } from "react";
 
-function normalize(o) {
+export interface SelectProps {
+  label?: string;
+  options?: (string | { value: string; label: string })[];
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+}
+
+function normalize(o: string | { value: string; label: string }): { value: string; label: string } {
   if (typeof o === "string") return { value: o, label: o };
   return o;
 }
 
-export function Select({ label, options = [], value, onChange, placeholder = "선택..." }) {
+export function Select({ label, options = [], value, onChange, placeholder = "선택..." }: SelectProps) {
   const [f, setF] = useState(false);
   const items = options.map(normalize);
   return (

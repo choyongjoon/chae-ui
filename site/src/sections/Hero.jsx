@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { DancheongStripe, Button } from "chae-ui";
 
+const COMMANDS = {
+  pnpm: "pnpm add chae-ui",
+  yarn: "yarn add chae-ui",
+  npm: "npm install chae-ui",
+};
+
+const PKG_MANAGERS = ["pnpm", "yarn", "npm"];
+
 export function Hero() {
   const [copied, setCopied] = useState(false);
+  const [pm, setPm] = useState("pnpm");
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("npm install chae-ui");
+    navigator.clipboard.writeText(COMMANDS[pm]);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -57,32 +66,69 @@ export function Hero() {
           shadcn/ui 기반 한국 전통 건축 디자인 시스템
         </p>
 
+        {/* 패키지 매니저 선택 탭 + 설치 명령 */}
         <div
-          role="button"
-          tabIndex={0}
-          aria-label="npm install chae-ui 복사"
-          onClick={handleCopy}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleCopy(); } }}
           style={{
             display: "inline-flex",
-            alignItems: "center",
-            gap: 10,
-            background: "var(--heuk)",
-            color: "var(--baek)",
-            padding: "10px 20px",
-            borderRadius: 4,
-            fontFamily: "'SF Mono', 'Fira Code', monospace",
-            fontSize: 14,
-            cursor: "pointer",
+            flexDirection: "column",
             marginBottom: 32,
-            transition: "opacity 0.15s",
           }}
         >
-          <span style={{ opacity: 0.5 }}>$</span>
-          <span>npm install chae-ui</span>
-          <span style={{ opacity: 0.5, fontSize: 12 }}>
-            {copied ? "복사됨!" : "클릭하여 복사"}
-          </span>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {PKG_MANAGERS.map((p) => (
+              <button
+                key={p}
+                onClick={() => setPm(p)}
+                style={{
+                  padding: "6px 16px",
+                  fontSize: 12,
+                  fontFamily: "'SF Mono', 'Fira Code', monospace",
+                  fontWeight: pm === p ? 600 : 400,
+                  color: pm === p ? "var(--baek)" : "var(--muted-foreground)",
+                  background: pm === p ? "var(--heuk)" : "transparent",
+                  border: "none",
+                  borderRadius: pm === p ? "4px 4px 0 0" : "4px 4px 0 0",
+                  cursor: "pointer",
+                  transition: "all 0.15s",
+                }}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            aria-label={`${COMMANDS[pm]} 복사`}
+            onClick={handleCopy}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleCopy();
+              }
+            }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              background: "var(--heuk)",
+              color: "var(--baek)",
+              padding: "10px 20px",
+              borderRadius: "0 4px 4px 4px",
+              fontFamily: "'SF Mono', 'Fira Code', monospace",
+              fontSize: 14,
+              cursor: "pointer",
+              transition: "opacity 0.15s",
+              minWidth: 280,
+              justifyContent: "center",
+            }}
+          >
+            <span style={{ opacity: 0.5 }}>$</span>
+            <span>{COMMANDS[pm]}</span>
+            <span style={{ opacity: 0.5, fontSize: 12 }}>
+              {copied ? "복사됨!" : "클릭하여 복사"}
+            </span>
+          </div>
         </div>
 
         <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>

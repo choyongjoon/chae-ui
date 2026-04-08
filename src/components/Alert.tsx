@@ -1,5 +1,13 @@
+import type { ReactNode } from "react";
+
+export interface AlertProps {
+  variant?: "info" | "warning" | "error";
+  title: string;
+  children?: ReactNode;
+}
+
 /** Alert — 단청 위계: info=청, warning=황, error=적 */
-export function Alert({ variant = "info", title, children }) {
+export function Alert({ variant = "info", title, children }: AlertProps) {
   const c = { info: { border: "var(--cheong)", bg: "rgba(43,107,94,0.06)", icon: "◈", color: "var(--cheong)" }, warning: { border: "var(--hwang)", bg: "rgba(212,168,67,0.08)", icon: "◇", color: "var(--mokjae)" }, error: { border: "var(--jeok)", bg: "rgba(194,59,59,0.06)", icon: "◆", color: "var(--jeok)" } }[variant];
   return (
     <div style={{ padding: "14px 16px", borderRadius: "2px", borderLeft: `3px solid ${c.border}`, background: c.bg }}>

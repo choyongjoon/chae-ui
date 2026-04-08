@@ -9,7 +9,7 @@ export const dancheong = {
   jeok: "#C23B3B",
   heuk: "#2C2825",
   hwang: "#D4A843",
-};
+} as const;
 
 export const nature = {
   hanzi: "#FAF6EF",
@@ -20,11 +20,17 @@ export const nature = {
   choga: "#B8A88A",
   songmok: "#5C7A5D",
   meok: "#3D3835",
-};
+} as const;
 
 export const fonts = {
   sans: "Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   serif: "'Nanum Myeongjo', serif",
+} as const;
+
+/** 단청 색띠 한 줄 */
+export type StripeBand = {
+  readonly color: string;
+  readonly flex: number;
 };
 
 /** 단청 색띠 기본 프리셋 */
@@ -51,4 +57,7 @@ export const stripePresets = {
     { color: "var(--baek)", flex: 0.3 },
     { color: "var(--cheong)", flex: 4 },
   ],
-};
+} as const satisfies Record<string, readonly StripeBand[]>;
+
+/** 프리셋 이름 유니온 타입 */
+export type StripePresetKey = keyof typeof stripePresets;

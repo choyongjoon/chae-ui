@@ -5,13 +5,16 @@
   "type": "module",
   "main": "./dist/chae-ui.cjs.js",
   "module": "./dist/chae-ui.es.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/chae-ui.es.js",
       "require": "./dist/chae-ui.cjs.js"
     },
     "./styles": "./dist/chae-ui.css",
     "./theme": {
+      "types": "./dist/theme.d.ts",
       "import": "./dist/theme.es.js",
       "require": "./dist/theme.cjs.js"
     }
@@ -30,12 +33,18 @@
   },
   "devDependencies": {
     "vite": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.0"
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.7.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "vite-plugin-dts": "^4.0.0"
   },
   "scripts": {
     "build": "vite build",
-    "prepublishOnly": "npm run build"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
+  "packageManager": "pnpm@10.33.0",
   "keywords": [
     "react",
     "ui",

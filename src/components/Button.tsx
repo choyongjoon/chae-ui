@@ -1,4 +1,13 @@
 import { useState } from "react";
+import type { CSSProperties, ReactNode, ButtonHTMLAttributes } from "react";
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "accent";
+  size?: "sm" | "default" | "lg";
+  disabled?: boolean;
+  children: ReactNode;
+  style?: CSSProperties;
+}
 
 const VARIANTS = {
   default: { bg: "var(--primary)", color: "var(--primary-foreground)", border: "none" },
@@ -15,12 +24,12 @@ const SIZES = {
   lg: { padding: "12px 28px", fontSize: "16px", lineHeight: "24px" },
 };
 
-export function Button({ variant = "default", size = "default", disabled = false, children, style: sx = {}, ...props }) {
+export function Button({ variant = "default", size = "default", disabled = false, children, style: sx = {}, ...props }: ButtonProps) {
   const v = VARIANTS[variant];
   const s = SIZES[size];
   const [hov, setHov] = useState(false);
 
-  const base = {
+  const base: CSSProperties = {
     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px",
     fontFamily: "var(--font-sans)", fontWeight: 500,
     borderRadius: "4px", transition: "all 0.15s", letterSpacing: "-0.01em",
@@ -28,7 +37,7 @@ export function Button({ variant = "default", size = "default", disabled = false
     ...s,
   };
 
-  const disabledStyle = disabled
+  const disabledStyle: CSSProperties = disabled
     ? { background: "var(--seok)", color: "var(--baek)", border: "none", opacity: 0.6, filter: "none" }
     : {};
 

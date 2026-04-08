@@ -1,4 +1,8 @@
-export function Breadcrumb({ items }) {
+export interface BreadcrumbProps {
+  items: string[];
+}
+
+export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
     <nav style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px" }}>
       {items.map((item, i) => (

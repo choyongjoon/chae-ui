@@ -8,8 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "chae-ui/styles": resolve(__dirname, "../src/styles/tokens.css"),
-      "chae-ui/theme": resolve(__dirname, "../src/lib/theme.js"),
-      "chae-ui": resolve(__dirname, "../src/index.js"),
+      "chae-ui/theme": resolve(__dirname, "../src/lib/theme.ts"),
+      "chae-ui": resolve(__dirname, "../src/index.ts"),
     },
   },
   server: {

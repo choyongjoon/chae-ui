@@ -1,5 +1,13 @@
 import { useState } from "react";
-export function Textarea({ label, placeholder, rows = 3, ...props }) {
+import type { TextareaHTMLAttributes } from "react";
+
+export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'rows' | 'placeholder'> {
+  label?: string;
+  placeholder?: string;
+  rows?: number;
+}
+
+export function Textarea({ label, placeholder, rows = 3, ...props }: TextareaProps) {
   const [f, setF] = useState(false);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>

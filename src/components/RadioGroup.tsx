@@ -1,9 +1,16 @@
-function normalize(o) {
+export interface RadioGroupProps {
+  options?: (string | { value: string; label: string })[];
+  value?: string;
+  onChange?: (value: string) => void;
+  label?: string;
+}
+
+function normalize(o: string | { value: string; label: string }): { value: string; label: string } {
   if (typeof o === "string") return { value: o, label: o };
   return o;
 }
 
-export function RadioGroup({ options = [], value, onChange, label }) {
+export function RadioGroup({ options = [], value, onChange, label }: RadioGroupProps) {
   const items = options.map(normalize);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>

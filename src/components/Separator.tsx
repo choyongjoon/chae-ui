@@ -1,5 +1,11 @@
 import { DancheongStripe } from "./DancheongStripe";
-export function Separator({ variant = "default", label }) {
+
+export interface SeparatorProps {
+  variant?: "default" | "dancheong";
+  label?: string;
+}
+
+export function Separator({ variant = "default", label }: SeparatorProps) {
   if (variant === "dancheong") return <div style={{ margin: "20px 0" }}><DancheongStripe /></div>;
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "16px 0" }}>
