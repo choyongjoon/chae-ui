@@ -6,8 +6,23 @@ import { ColorPalette } from "./sections/ColorPalette";
 import { ComponentDocs } from "./sections/ComponentDocs";
 import { Footer } from "./sections/Footer";
 
+const MOBILE_BREAKPOINT = 768;
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < MOBILE_BREAKPOINT : false
+  );
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return isMobile;
+}
+
 export default function App() {
   const [activeId, setActiveId] = useState("hero");
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,7 +51,7 @@ export default function App() {
       }}
     >
       <Sidebar activeId={activeId} />
-      <main style={{ minHeight: "100vh" }}>
+      <main style={{ marginLeft: isMobile ? 0 : 220, minHeight: "100vh" }}>
         <Hero />
         <Introduction />
         <ColorPalette />

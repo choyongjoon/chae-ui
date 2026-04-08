@@ -88,10 +88,10 @@ export function Sidebar({ activeId }) {
 
   return (
     <>
-      {/* 모바일 햄버거 버튼 */}
-      {isMobile && (
+      {/* 모바일 햄버거 버튼 (사이드바 닫혀있을 때만) */}
+      {isMobile && !open && (
         <button
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen(true)}
           aria-label="메뉴 열기"
           style={{
             position: "fixed",
@@ -111,18 +111,9 @@ export function Sidebar({ activeId }) {
           }}
         >
           <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
-            {open ? (
-              <>
-                <line x1="2" y1="2" x2="16" y2="12" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="2" y1="12" x2="16" y2="2" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
-              </>
-            ) : (
-              <>
-                <line x1="1" y1="1" x2="17" y2="1" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="1" y1="7" x2="17" y2="7" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="1" y1="13" x2="17" y2="13" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
-              </>
-            )}
+            <line x1="1" y1="1" x2="17" y2="1" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="1" y1="7" x2="17" y2="7" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="1" y1="13" x2="17" y2="13" stroke="var(--foreground)" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>
       )}
@@ -162,25 +153,53 @@ export function Sidebar({ activeId }) {
           boxShadow: isMobile && open ? "4px 0 16px rgba(0,0,0,0.1)" : "none",
         }}
       >
-        {/* Branding */}
-        <a
-          href="#hero"
-          onClick={handleLinkClick}
+        {/* Branding + 모바일 닫기 */}
+        <div
           style={{
-            display: "block",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             padding: "20px 20px 16px",
-            fontFamily: "var(--font-serif)",
-            fontSize: 18,
-            fontWeight: 800,
-            color: "var(--foreground)",
-            letterSpacing: "-0.02em",
             borderBottom: "1px solid var(--border)",
             marginBottom: 12,
-            textDecoration: "none",
           }}
         >
-          채 UI
-        </a>
+          <a
+            href="#hero"
+            onClick={handleLinkClick}
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: 18,
+              fontWeight: 800,
+              color: "var(--foreground)",
+              letterSpacing: "-0.02em",
+              textDecoration: "none",
+            }}
+          >
+            채 UI
+          </a>
+          {isMobile && (
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="메뉴 닫기"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 4,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--muted-foreground)",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+          )}
+        </div>
 
         {SECTIONS.filter((s) => s.id !== "hero").map((s, i) => {
           if (s.type === "divider") {
