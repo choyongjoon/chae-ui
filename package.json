@@ -1,6 +1,6 @@
 {
   "name": "chae-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "한국 전통 건축 양식 기반 React UI 컴포넌트 — Korean traditional architecture-inspired React components built on shadcn/ui",
   "type": "module",
   "main": "./dist/chae-ui.cjs.js",
