@@ -4,7 +4,7 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/chae/",
+  base: "/chae-ui/",
   resolve: {
     alias: {
       "chae-ui/styles": resolve(__dirname, "../src/styles/tokens.css"),
