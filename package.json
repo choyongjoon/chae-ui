@@ -1,0 +1,57 @@
+{
+  "name": "chae-ui",
+  "version": "0.1.0",
+  "description": "한국 전통 건축 양식 기반 React UI 컴포넌트 — Korean traditional architecture-inspired React components built on shadcn/ui",
+  "type": "module",
+  "main": "./dist/chae-ui.cjs.js",
+  "module": "./dist/chae-ui.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/chae-ui.es.js",
+      "require": "./dist/chae-ui.cjs.js"
+    },
+    "./styles": "./dist/chae-ui.css",
+    "./theme": {
+      "import": "./dist/theme.es.js",
+      "require": "./dist/theme.cjs.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "./dist/chae-ui.css"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "design-system",
+    "korean",
+    "한국",
+    "단청",
+    "한옥",
+    "shadcn",
+    "traditional-architecture"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/choyongjoon/chae.git"
+  },
+  "homepage": "https://choyongjoon.github.io/chae/"
+}
