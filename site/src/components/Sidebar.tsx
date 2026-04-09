@@ -8,6 +8,7 @@ interface SectionItem {
 
 const SECTIONS: SectionItem[] = [
   { id: "hero", label: "채 UI" },
+  { id: "showcase", label: "쇼케이스" },
   { id: "introduction", label: "소개" },
   { id: "colors", label: "색상 팔레트" },
   { type: "divider", label: "컴포넌트" },

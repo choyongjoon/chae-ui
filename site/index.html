@@ -23,6 +23,10 @@
       nav::-webkit-scrollbar { width: 4px; }
       nav::-webkit-scrollbar-thumb { background: var(--border, #D8D0C4); border-radius: 2px; }
       nav::-webkit-scrollbar-track { background: transparent; }
+      .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .showcase-grid .span-2 { grid-column: span 2; }
+      @media (max-width: 1060px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 768px) { .showcase-grid { grid-template-columns: 1fr; } .showcase-grid .span-2 { grid-column: span 1; } }
     </style>
   </head>
   <body>

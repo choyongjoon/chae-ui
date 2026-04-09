@@ -3,6 +3,7 @@ import { Sidebar } from "./components/Sidebar";
 import { Hero } from "./sections/Hero";
 import { Introduction } from "./sections/Introduction";
 import { ColorPalette } from "./sections/ColorPalette";
+import { Showcase } from "./sections/Showcase";
 import { ComponentDocs } from "./sections/ComponentDocs";
 import { Footer } from "./sections/Footer";
 
@@ -53,6 +54,7 @@ export default function App() {
       <Sidebar activeId={activeId} />
       <main style={{ marginLeft: isMobile ? 0 : 220, minHeight: "100vh" }}>
         <Hero />
+        <Showcase />
         <Introduction />
         <ColorPalette />
         <ComponentDocs />
