@@ -41,7 +41,7 @@ export function Footer() {
         }}
       >
         <p>
-          채 UI — shadcn/ui 기반 한국 전통 건축 디자인 시스템
+          채 UI — shadcn/ui 기반 한국 전통 건축 양식 체계
         </p>
         <p style={{ marginTop: 8 }}>
           <FooterLink href="https://github.com/choyongjoon/chae-ui">GitHub</FooterLink>

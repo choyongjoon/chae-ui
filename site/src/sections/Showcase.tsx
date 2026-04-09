@@ -257,10 +257,10 @@ export function Showcase() {
             marginBottom: 12,
           }}
         >
-          컴포넌트로 만드는 한옥
+          부재로 짓는 한옥
         </h2>
         <p style={{ fontSize: 15, color: "var(--muted-foreground)", lineHeight: 1.6 }}>
-          단청의 색, 창호의 구조, 한지의 질감을 조합하여 실제 인터페이스를 구성합니다.
+          단청의 색, 창호의 구조, 한지의 질감을 조합하여 실제 화면을 구성합니다.
         </p>
       </div>
 

@@ -53,7 +53,7 @@ export function Hero() {
         >
           단청의 색(彩)과 한옥의 구조(채)를
           <br />
-          현대 UI 컴포넌트에 담다
+          현대 UI 부재에 담다
         </p>
         <p
           style={{
@@ -63,7 +63,7 @@ export function Hero() {
             fontFamily: "var(--font-sans)",
           }}
         >
-          shadcn/ui 기반 한국 전통 건축 디자인 시스템
+          shadcn/ui 기반 한국 전통 건축 양식 체계
         </p>
 
         {/* 패키지 매니저 선택 탭 + 설치 명령 */}

@@ -9,11 +9,32 @@ interface ColorItem {
 }
 
 const OBANGSAEK: ColorItem[] = [
-  { name: "청 cheong", var: "--cheong", hex: "#2B6B5E", meaning: "木 / 동 / Blue-green" },
-  { name: "백 baek", var: "--baek", hex: "#F5F0E8", meaning: "金 / 서 / Warm white", dark: true },
+  {
+    name: "청 cheong",
+    var: "--cheong",
+    hex: "#2B6B5E",
+    meaning: "木 / 동 / Blue-green",
+  },
+  {
+    name: "백 baek",
+    var: "--baek",
+    hex: "#F5F0E8",
+    meaning: "金 / 서 / Warm white",
+    dark: true,
+  },
   { name: "적 jeok", var: "--jeok", hex: "#C23B3B", meaning: "火 / 남 / Red" },
-  { name: "흑 heuk", var: "--heuk", hex: "#2C2825", meaning: "水 / 북 / Near black" },
-  { name: "황 hwang", var: "--hwang", hex: "#D4A843", meaning: "土 / 중앙 / Gold yellow" },
+  {
+    name: "흑 heuk",
+    var: "--heuk",
+    hex: "#2C2825",
+    meaning: "水 / 북 / Near black",
+  },
+  {
+    name: "황 hwang",
+    var: "--hwang",
+    hex: "#D4A843",
+    meaning: "土 / 중앙 / Gold yellow",
+  },
 ];
 
 const MATERIALS: ColorItem[] = [
@@ -37,7 +58,14 @@ interface SwatchProps {
 
 function Swatch({ name, hex, cssVar, meaning, dark }: SwatchProps) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        marginBottom: 10,
+      }}
+    >
       <div
         style={{
           width: 48,
@@ -49,10 +77,23 @@ function Swatch({ name, hex, cssVar, meaning, dark }: SwatchProps) {
         }}
       />
       <div>
-        <div style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 600 }}>
+        <div
+          style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: 14,
+            fontWeight: 600,
+          }}
+        >
           {name}
         </div>
-        <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 2 }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            alignItems: "center",
+            marginTop: 2,
+          }}
+        >
           <Badge variant="outline">{cssVar}</Badge>
           <span
             style={{
@@ -94,7 +135,7 @@ export function ColorPalette() {
           marginBottom: 24,
         }}
       >
-        색상 팔레트
+        색표
       </h2>
 
       <h3
@@ -105,7 +146,7 @@ export function ColorPalette() {
           marginBottom: 16,
         }}
       >
-        오방색 (Five Cardinal Colors)
+        오방색
       </h3>
       <p
         style={{
@@ -115,11 +156,19 @@ export function ColorPalette() {
           lineHeight: 1.6,
         }}
       >
-        음양오행에 기반한 다섯 가지 기본색. 각 색은 방위, 계절, 원소와 대응됩니다.
+        음양오행에 기반한 다섯 가지 기본색. 각 색은 방위, 계절, 원소와
+        대응됩니다.
       </p>
       <div style={{ marginBottom: 40 }}>
         {OBANGSAEK.map((c) => (
-          <Swatch key={c.var} name={c.name} hex={c.hex} cssVar={c.var} meaning={c.meaning} dark={c.dark} />
+          <Swatch
+            key={c.var}
+            name={c.name}
+            hex={c.hex}
+            cssVar={c.var}
+            meaning={c.meaning}
+            dark={c.dark}
+          />
         ))}
       </div>
 
@@ -131,7 +180,7 @@ export function ColorPalette() {
           marginBottom: 16,
         }}
       >
-        자연 소재 (Natural Materials)
+        자연 소재
       </h3>
       <p
         style={{
@@ -141,11 +190,17 @@ export function ColorPalette() {
           lineHeight: 1.6,
         }}
       >
-        한옥의 건축 재료에서 추출한 보조 팔레트.
+        한옥의 건축 재료에서 추출한 보조 색표.
       </p>
       <div>
         {MATERIALS.map((c) => (
-          <Swatch key={c.var} name={c.name} hex={c.hex} cssVar={c.var} dark={c.dark} />
+          <Swatch
+            key={c.var}
+            name={c.name}
+            hex={c.hex}
+            cssVar={c.var}
+            dark={c.dark}
+          />
         ))}
       </div>
     </section>

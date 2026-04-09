@@ -606,11 +606,11 @@ function UnsupportedList() {
           marginBottom: 6,
         }}
       >
-        미지원 컴포넌트
+        미지원 부재
       </h3>
       <p style={{ fontSize: 14, color: "var(--muted-foreground)", marginBottom: 16, lineHeight: 1.6 }}>
         아래는 <a href="https://ui.shadcn.com/docs/components" target="_blank" rel="noopener noreferrer" style={{ color: "var(--primary)" }}>shadcn/ui</a>에서
-        제공하지만 채 UI에서 아직 지원하지 않는 컴포넌트입니다.
+        제공하지만 채 UI에서 아직 지원하지 않는 부재입니다.
       </p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
         {UNSUPPORTED.map((name) => (
@@ -646,10 +646,10 @@ export function ComponentDocs() {
             marginBottom: 8,
           }}
         >
-          컴포넌트
+          부재
         </h2>
         <p style={{ fontSize: 14, color: "var(--muted-foreground)", lineHeight: 1.6 }}>
-          22개의 React 컴포넌트. shadcn/ui 이름 규칙을 따르며, 한국 전통 건축의 요소를 반영합니다.
+          22개의 React 부재. shadcn/ui 이름 규칙을 따르며, 한국 전통 건축의 요소를 반영합니다.
         </p>
       </div>
       <ButtonDemo />

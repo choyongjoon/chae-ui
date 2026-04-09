@@ -34,7 +34,7 @@ const MAPPINGS: Mapping[] = [
   },
   {
     source: "황토",
-    desc: "Warm neutral, secondary 팔레트",
+    desc: "Warm neutral, secondary 색표",
     impl: "--secondary variable",
   },
 ];
@@ -68,7 +68,7 @@ export function Introduction() {
           >
             shadcn/ui
           </a>
-          의 컴포넌트 구조를 기반으로, 한국 전통 건축 양식의 미학을 현대 웹 인터페이스에 접목한 디자인 시스템입니다.
+          의 부재 구조를 기반으로, 한국 전통 건축 양식의 미학을 현대 웹 화면에 접목한 양식 체계입니다.
         </p>
         <p
           style={{
@@ -79,7 +79,7 @@ export function Introduction() {
           }}
         >
           <strong>채(彩)</strong>는 고운 빛깔과 채색을, <strong>채</strong>(고유어)는 한옥에서 건물 한 동을 세는 단위를 뜻합니다.
-          단청의 오방색 체계, 창호의 격자 구조, 한지의 질감, 목재의 따뜻함을 React 컴포넌트로 표현합니다.
+          단청의 오방색 체계, 창호의 격자 구조, 한지의 질감, 목재의 따뜻함을 React 부재로 표현합니다.
         </p>
       </Card>
 
@@ -92,7 +92,7 @@ export function Introduction() {
           marginBottom: 16,
         }}
       >
-        디자인 원천
+        양식 원천
       </h3>
 
       <Card variant="changho">
