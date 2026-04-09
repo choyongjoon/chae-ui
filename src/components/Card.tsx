@@ -11,7 +11,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 const STYLES: Record<string, CSSProperties> = {
   default: { background: "var(--card)", border: "1px solid var(--border)", borderRadius: "4px" },
   changho: { background: "var(--card)", border: "var(--changho-border, 3px) solid var(--changho-color, var(--mokjae))", borderRadius: "2px" },
-  hanzi: { background: "var(--hanzi)", border: "1px solid var(--border)", borderRadius: "4px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" },
+  hanzi: { backgroundColor: "var(--hanzi)", backgroundImage: "var(--hanzi-texture)", backgroundRepeat: "repeat", border: "1px solid var(--border)", borderRadius: "4px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" },
   dancheong: { background: "var(--card)", border: "1px solid var(--border)", borderRadius: "4px", borderTop: "3px solid var(--jeok)" },
   stone: { background: "#F0EDEA", border: "1px solid var(--seok)", borderRadius: "0px" },
 };
